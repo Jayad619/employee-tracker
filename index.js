@@ -138,3 +138,73 @@ function addDepartment() {
       });
     });
 }
+
+// add a Role to the database
+function addRole() {
+  inquirer
+    .prompt([
+      {
+        name: "title",
+        message: "which role would you like to add?",
+        type: "input",
+      },
+      {
+        name: "salary",
+        message: "Salary for this role?",
+        type: "input",
+      },
+      {
+        name: "department_id",
+        message: "ID for the department this role associated with?",
+        type: "input",
+      },
+    ])
+    .then(({ title, salary, department_id }) => {
+      const sql = `INSERT INTO emp_role (title, salary, department_id)
+                      VALUES (?, ?, ?)`;
+      const params = [title, salary, department_id];
+      connection.query(sql, params, (err, res) => {
+        if (err) throw err;
+        console.log(`Role ${title} added!`);
+        displayRoles();
+      });
+    });
+}
+
+// add an Employee database
+function addEmployee() {
+  inquirer
+    .prompt([
+      {
+        name: "first_name",
+        message: "employee's first name?",
+        type: "input",
+      },
+      {
+        name: "last_name",
+        message: "employee's last name?",
+        type: "input",
+      },
+      {
+        name: "role",
+        message: "What is the employee's role? (Enter the role ID number)",
+        type: "input",
+      },
+      {
+        name: "manager",
+        message:
+          "Who is the employee's manager? (Enter the managers ID number)",
+        type: "input",
+      },
+    ])
+    .then(({ first_name, last_name, role, manager }) => {
+      const sql = `INSERT INTO employee (first_name, last_name, emp_role_id, manager_id)
+                      VALUES (?, ?, ?, ?)`;
+      const params = [first_name, last_name, role, manager];
+      connection.query(sql, params, (err, res) => {
+        if (err) throw err;
+        console.log(`Employee ${first_name} ${last_name} was added!`);
+        displayEmployees();
+      });
+    });
+}
