@@ -71,3 +71,28 @@ function mainMenu() {
       }
     });
 }
+
+// Displays departments in db
+function displayDepartments() {
+  const sql = `SELECT id, dept_name FROM department`;
+  connection.query(sql, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+    mainMenu();
+  });
+}
+
+// Display roles in db
+function displayRoles() {
+  const sql = `SELECT emp_role.title AS Title, 
+                  emp_role.id AS "Title ID", 
+                  department.dept_name As Department, 
+                  emp_role.salary AS Salary 
+                  FROM emp_role 
+                  LEFT JOIN department ON emp_role.department_id = department.id`;
+  connection.query(sql, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+    mainMenu();
+  });
+}
