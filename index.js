@@ -229,3 +229,50 @@ const addEmployee = () => {
     }
   );
 };
+
+const updateRole = () => {
+  connection.query("SELECT * FROM employee", function (err, empResult) {
+    connection.query("SELECT * FROM role", (err, roleResult) => {
+      inquirer
+        .prompt([
+          {
+            type: "list",
+            name: "employeeId",
+            message: "which employee would you like to update?",
+            choices: empResult.map((employee) => {
+              return {
+                name: employee.first_name + " " + employee.last_name,
+                value: employee.id,
+              };
+            }),
+          },
+          {
+            type: "list",
+            name: "role",
+            message: "what is the updated role?",
+            choices: roleResult.map((role) => {
+              return {
+                name: role.title,
+                value: role.role_id,
+              };
+            }),
+          },
+        ])
+        .then((answer) => {
+          connection.query(
+            "UPDATE employee SET role_id = ? WHERE id = ?",
+            [answer.role, answer.employeeId],
+            (error, result) => {
+              if (error) throw error;
+              console.log(`
+                  ------------
+                  updated role!
+                  ------------
+                  `);
+              menu();
+            }
+          );
+        });
+    });
+  });
+};
