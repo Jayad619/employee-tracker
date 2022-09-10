@@ -13,62 +13,71 @@ const connection = mysql.createConnection({
 
 connection.connect((err) => {
   if (err) throw err;
-  console.log("connected as id " + connection.threadId);
-  mainMenu();
+  console.log("connected as id " + connection.threadId + "\n");
+  menu();
 });
 
 // Main Menu
-function mainMenu() {
+const menu = () => {
   inquirer
     .prompt([
-      //Prompt the user
       {
         type: "list",
-        name: "menu",
-        message: "choose an option from the list?",
+        name: "action",
+        message: "what would you like to do?",
         choices: [
-          "View Departments",
-          "View Roles",
-          "View Employees",
-          "Add a Department",
-          "Add a Role",
-          "Add an Employee",
-          "Update an Employee Role",
-          "Exit",
+          "view all departments",
+          "view all roles",
+          "view all employees",
+          "add a department",
+          "add a role",
+          "add an employee",
+          "update an employee's role",
+          "exit",
         ],
       },
     ])
-    .then((menuChoice) => {
-      switch (menuChoice.menu) {
-        case "View Departments":
-          displayDepartments();
+    .then((userChoice) => {
+      switch (userChoice.action) {
+        case "view all departments":
+          query = "SELECT * FROM department";
+          viewAll(query);
           break;
-        case "View Roles":
-          displayRoles();
+
+        case "view all roles":
+          query =
+            "SELECT * FROM role JOIN department ON department.department_id = role.department_id ";
+          viewAll(query);
           break;
-        case "View Employees":
-          displayEmployees();
+
+        case "view all employees":
+          query =
+            "SELECT * FROM employee LEFT JOIN role ON employee.role_id = role.role_id JOIN department ON role.department_id = department.department_id ORDER BY department.name ";
+          viewAll(query);
           break;
-        case "Add a Department":
+
+        case "add a department":
           addDepartment();
           break;
-        case "Add a Role":
+
+        case "add a role":
           addRole();
           break;
-        case "Add an Employee":
+
+        case "add an employee":
           addEmployee();
           break;
-        case "Update an Employee Role":
-          updateEmployee();
+
+        case "update an employee's role":
+          updateRole();
           break;
-        case "Exit":
+
+        case "exit":
           connection.end();
           break;
-        default:
-          mainMenu();
       }
     });
-}
+};
 
 // Displays departments in db
 function displayDepartments() {
