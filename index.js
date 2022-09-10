@@ -208,3 +208,29 @@ function addEmployee() {
       });
     });
 }
+
+// Function to update an Employee's Role in the database
+function updateEmployee() {
+  inquirer
+    .prompt([
+      {
+        name: "employee_id",
+        message: " ID of the employee that will be updated",
+        type: "input",
+      },
+      {
+        name: "emp_role",
+        message: " employee's new role id? ",
+        type: "input",
+      },
+    ])
+    .then(({ employee_id, emp_role }) => {
+      const sql = `UPDATE employee SET emp_role_id = ?
+                      WHERE id = ?`;
+      const params = [emp_role, employee_id];
+      connection.query(sql, params, (err, res) => {
+        if (err) throw err;
+        displayEmployees();
+      });
+    });
+}
