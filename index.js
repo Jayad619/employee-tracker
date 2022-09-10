@@ -7,7 +7,7 @@ const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
   port: 3306,
-  password: "nextS+3p",
+  password: "Sarim123",
   database: "employeesDB",
 });
 
@@ -24,7 +24,7 @@ const menu = () => {
       {
         type: "list",
         name: "action",
-        message: "what would you like to do?",
+        message: "What would you like to do?",
         choices: [
           "view all departments",
           "view all roles",
@@ -95,7 +95,7 @@ const addDepartment = () => {
       {
         type: "input",
         name: "depName",
-        message: "what department would you like to add?",
+        message: "What department would you like to add?",
       },
     ])
     .then((answer) => {
@@ -120,17 +120,17 @@ const addRole = () => {
           {
             type: "input",
             name: "roleName",
-            message: "what role would you like to add?",
+            message: "What role would you like to add?",
           },
           {
             type: "input",
             name: "salary",
-            message: "what is the salary?",
+            message: "What is the salary?",
           },
           {
             type: "list",
             name: "department",
-            message: "what is the department?",
+            message: "What is the department?",
             choices: depResult.map((department) => {
               return {
                 name: department.name,
@@ -173,17 +173,17 @@ const addEmployee = () => {
               {
                 type: "input",
                 name: "firstName",
-                message: "what is employee's first name?",
+                message: "What is employee's first name?",
               },
               {
                 type: "input",
                 name: "lastName",
-                message: "what is employee's last name?",
+                message: "What is employee's last name?",
               },
               {
                 type: "list",
                 name: "role",
-                message: "what is employee's role?",
+                message: "What is employee's role?",
                 choices: roleResult.map((role) => {
                   return {
                     name: role.title,
@@ -194,7 +194,7 @@ const addEmployee = () => {
               {
                 type: "list",
                 name: "manager",
-                message: "who is employee's manager?",
+                message: "Who is employee's manager?",
                 choices: managerRes.map((manager) => {
                   return {
                     name: manager.first_name + " " + manager.last_name,
@@ -238,7 +238,7 @@ const updateRole = () => {
           {
             type: "list",
             name: "employeeId",
-            message: "which employee would you like to update?",
+            message: "Which employee would you like to update?",
             choices: empResult.map((employee) => {
               return {
                 name: employee.first_name + " " + employee.last_name,
@@ -249,7 +249,7 @@ const updateRole = () => {
           {
             type: "list",
             name: "role",
-            message: "what is the updated role?",
+            message: "What is the updated role?",
             choices: roleResult.map((role) => {
               return {
                 name: role.title,
