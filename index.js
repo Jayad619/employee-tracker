@@ -96,3 +96,45 @@ function displayRoles() {
     mainMenu();
   });
 }
+
+// Displays Employees in db
+function displayEmployees() {
+  const sql = `SELECT employee.id AS "Employee ID", 
+                  employee.first_name AS "First Name", 
+                  employee.last_name AS "Last Name", 
+                  emp_role.title AS "Title", 
+                  department.dept_name AS "Department", 
+                  emp_role.salary AS "Salary" 
+                  FROM employee
+                  LEFT JOIN emp_role
+                  ON employee.emp_role_id = emp_role.id
+                  LEFT JOIN department
+                  ON emp_role.department_id = department.id`;
+  connection.query(sql, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+    mainMenu();
+  });
+}
+
+// add a Department to the db
+function addDepartment() {
+  inquirer
+    .prompt([
+      {
+        name: "deptName",
+        message: "add new department?",
+        type: "input",
+      },
+    ])
+    .then(({ deptName }) => {
+      const sql = `INSERT INTO department (dept_name)
+                      VALUES (?)`;
+      const params = [deptName];
+      connection.query(sql, params, (err, res) => {
+        if (err) throw err;
+        console.log(`Department ${deptName} inserted in database!`);
+        displayDepartments();
+      });
+    });
+}
