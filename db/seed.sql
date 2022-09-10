@@ -19,12 +19,22 @@ VALUES
 
 INSERT INTO employee (first_name, last_name, emp_role_id, manager_id)
 VALUES
-    ("frank", "bruno", 2, null, 1),
-    ("nina", "mercedes", 2, 1, 1),
-    ("kill", "bill", 2, 1, 1),
-    ("mike", "tyson", 3, 4, 2),
-    ("Harold", "shipmen", 3, 4, 2),
-    ("al", "pacino", 4, null, 2),
-    ("robert", "deniro", 5, null, 3),
-    ("tom", "Hanks", 6, 7, 4),
-    ("Tracy", "Koch", 7, null, 4);
+    ('Jayad', ' Arshad', 1, null),
+    ('Bader', 'Munir', 2, 1),
+    ('Amina', 'Hayat', 3, 2),
+    ('Ahmed', 'Shan', 3, 2),
+    ('Tiah', 'Watt', 4, 5),
+    ('Rez', 'Malek', 5, null),
+    ('Usama', 'Arshad', 4, 5),
+    ('Sponge', 'Bob', 6, null),
+    ('Patrick', "starr", 7, null),
+    ('Skye', 'Jackson', 8, null),
+    ('Samuel', 'Jackson', 9, 8),
+    ('Bob', 'Marley', 9, 8),
+    ('Hamed', 'Ali', 10, null),
+    ('John', 'Sina', 11, 10),
+    ('Marc', 'Wick', 12, null),
+    ('Bukayo', 'Saka', 13, 12),
+    ('Emile', 'Smith', 14, null),
+    ('Willan', 'Saliba', 15, 14),
+    ('Ash', 'Chris', 15, 14);
