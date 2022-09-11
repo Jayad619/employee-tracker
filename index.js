@@ -89,6 +89,7 @@ const viewAll = (query) => {
   menu();
 };
 
+// add department
 const addDepartment = () => {
   inquirer
     .prompt([
@@ -111,6 +112,7 @@ const addDepartment = () => {
     });
 };
 
+// add role
 const addRole = () => {
   connection.query(
     "SELECT department.name, department.department_id FROM department",
@@ -161,6 +163,7 @@ const addRole = () => {
   );
 };
 
+// add employee
 const addEmployee = () => {
   connection.query(
     "SELECT role.title, role.role_id FROM role",
@@ -230,6 +233,7 @@ const addEmployee = () => {
   );
 };
 
+// update employees role
 const updateRole = () => {
   connection.query("SELECT * FROM employee", function (err, empResult) {
     connection.query("SELECT * FROM role", (err, roleResult) => {
